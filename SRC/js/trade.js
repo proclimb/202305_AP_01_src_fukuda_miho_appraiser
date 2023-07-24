@@ -3,7 +3,7 @@
 //
 function fnTradeEditCheck() {
 	tmp = form.name.value;
-	if (tmp.length < 0) {
+	if (tmp.length == 0) {
 		alert('業者名を入力してください');
 		return;
 	}
@@ -73,7 +73,7 @@ function fnTradeEditCheck() {
 	}
 
 	if (confirm('この内容で登録します。よろしいですか？')) {
-		form.act.value = 'tradeEditCompleta';
+		form.act.value = 'tradeEditComplete';
 		form.submit();
 	}
 }

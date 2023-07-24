@@ -9,37 +9,37 @@ function fnSqlArticleList($flg, $sDel, $sArticle, $sRoom, $sKeyPlace, $sArticleN
 			$sql  = "SELECT COUNT(*)";
 			break;
 		case 1:
-			$sql  = "SELECT ARTICLENO, ARTICLE, RO0M, KEYPLACE, ARTICLENOTE, KEYBOX, DRAWING, SELLCHARGE";
+			$sql  = "SELECT ARTICLENO, ARTICLE, ROOM, KEYPLACE, ARTICLENOTE, KEYBOX, DRAWING, SELLCHARGE";
 			break;
 	}
 	$sql .= " FROM TBLARTICLE";
 	$sql .= " WHERE DEL = $sDel";
 	if ($sArticle) {
-		$sql .= " OR ARTICLE LIKE '%$sArticle$%'";
+		$sql .= " AND ARTICLE LIKE '%$sArticle%'";
 	}
 	if ($sRoom) {
-		$sql .= " OR ROOM LIKE '%$sRoom%'";
+		$sql .= " AND ROOM LIKE '%$sRoom%'";
 	}
 	if ($sKeyPlace) {
-		$sql .= " OR KEYPLACE LIKE '%$sKeyPlace%'";
+		$sql .= " AND KEYPLACE LIKE '%$sKeyPlace%'";
 	}
 	if ($sArticleNote) {
-		$sql .= " OR ARTICLENOTE LIKE '%$sArticleNote%'";
+		$sql .= " AND ARTICLENOTE LIKE '%$sArticleNote%'";
 	}
 	if ($sKeyBox) {
-		$sql .= " OR KEYBOX LIKE '%l$sKeyBox%'";
+		$sql .= " AND KEYBOX LIKE '%$sKeyBox%'";
 	}
 	if ($sDrawing) {
-		$sql .= " OR DRAWING LIKE '%$sDrawing%'";
+		$sql .= " AND DRAWING LIKE '%$sDrawing%'";
 	}
 	if ($sSellCharge) {
-		$sql .= " OR SELLCHARGE LIKE '%$sSellCharge%'";
+		$sql .= " AND SELLCHARGE LIKE '%$sSellCharge%'";
 	}
 	if ($orderBy) {
 		$sql .= " ORDER BY $orderBy $orderTo";
 	}
 	if ($flg) {
-		$sql .= " LIMIT " . (($sPage + 1) * PAGE_MAX) . ", " . PAGE_MAX;
+		$sql .= " LIMIT " . (($sPage - 1) * PAGE_MAX) . ", " . PAGE_MAX;
 	}
 
 	return ($sql);
@@ -88,8 +88,8 @@ function fnSqlArticleUpdate($articleNo, $article, $room, $keyPlace, $address, $a
 //
 function fnSqlArticleInsert($articleNo,  $keyPlace, $article, $address,  $keyBox, $articleNote, $drawing, $sellCharge, $room, $del)
 {
-	$sql  = "INSERT INTO tblarticle (";
-	$sql .= " ARTICLENO, ROOM, ARTICLE, KEYPLACE, ARTICLENOTE, KEYBOX, ADDRESS, DUEDT, SELLCHARGE, AREA, YEARS, SELLPRICE, INTERIORPRICE, CONSTTRADER,"
+	$sql  = "INSERT INTO TBLARTICLE (";
+	$sql .= " ARTICLENO, ARTICLE, ROOM, KEYPLACE, ADDRESS, ARTICLENOTE, KEYBOX, DUEDT, SELLCHARGE, AREA, YEARS, SELLPRICE, INTERIORPRICE, CONSTTRADER,"
 		. " CONSTPRICE, CONSTADD, CONSTNOTE, PURCHASEDT, WORKSTARTDT, WORKENDDT, LINEOPENDT, LINECLOSEDT, RECEIVE, HOTWATER, SITEDT, LEAVINGFORM,"
 		. " LEAVINGDT, MANAGECOMPANY, FLOORPLAN, FORMEROWNER, BROKERCHARGE, BROKERCONTACT, INTERIORCHARGE, CONSTFLG1, CONSTFLG2, CONSTFLG3, CONSTFLG4, INSDT, UPDT, DEL,"
 		. " DRAWING, LINEOPENCONTACTDT, LINECLOSECONTACTDT, LINECONTACTNOTE, ELECTRICITYCHARGE, GASCHARGE, LIGHTORDER";

@@ -54,7 +54,7 @@ function fnSqlArticleEdit($articleNo)
 {
 	$sql  = "SELECT ARTICLE, ROOM, KEYPLACE, ADDRESS, ARTICLENOTE, KEYBOX, DRAWING, SELLCHARGE, DEL";
 	$sql .= " FROM TBLARTICLE";
-	$sql .= " WHERE ARTICLENO = 1";
+	$sql .= " WHERE ARTICLENO = $articleNo";
 
 	return ($sql);
 }
@@ -86,7 +86,8 @@ function fnSqlArticleUpdate($articleNo, $article, $room, $keyPlace, $address, $a
 //
 //物件管理情報登録
 //
-function fnSqlArticleInsert($articleNo,  $keyPlace, $article, $address,  $keyBox, $articleNote, $drawing, $sellCharge, $room, $del)
+//function fnSqlArticleInsert($articleNo,  $keyPlace, $article, $address,  $keyBox, $articleNote, $drawing, $sellCharge, $room, $del)
+function fnSqlArticleInsert($articleNo, $article, $room, $keyPlace, $articleNote, $drawing, $address, $keyBox, $sellCharge, $del)
 {
 	$sql  = "INSERT INTO TBLARTICLE (";
 	$sql .= " ARTICLENO, ARTICLE, ROOM, KEYPLACE, ADDRESS, ARTICLENOTE, KEYBOX, DUEDT, SELLCHARGE, AREA, YEARS, SELLPRICE, INTERIORPRICE, CONSTTRADER,"
@@ -98,7 +99,7 @@ function fnSqlArticleInsert($articleNo,  $keyPlace, $article, $address,  $keyBox
 		. " '', '', '', '', '', '', '', '', '', '', '', '',"
 		. " '', '', '', '', '', '', '', '', '', '', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '$del',"
 		. " '$drawing', '', '', '', '', '', '' )";
-
+	var_dump($room);
 	return ($sql);
 }
 

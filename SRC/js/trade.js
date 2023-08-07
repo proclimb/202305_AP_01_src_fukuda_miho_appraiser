@@ -1,10 +1,11 @@
 //
 //業者一覧チェック
-//
+//タイトル管理の文function fnFTitleEditCheck(zero) {
+//元の文function fnTradeEditCheck() {
 function fnTradeEditCheck() {
 	tmp = form.name.value;
 	if (tmp.length == 0) {
-		alert('業者名を入力してください');
+		alert('業者名	を入力してください');
 		return;
 	}
 	if (tmp.length > 100) {
@@ -12,7 +13,7 @@ function fnTradeEditCheck() {
 		return;
 	}
 
-	tmp = form.nameYomi.value;
+	tmp = form.nameFuri.value;
 	if (tmp.length > 100) {
 		alert('業者名（よみ）は100文字以内で入力してください');
 		return;
@@ -73,8 +74,11 @@ function fnTradeEditCheck() {
 	}
 
 	if (confirm('この内容で登録します。よろしいですか？')) {
-		form.act.value = 'tradeEditComplete';
+		form.act.value = 'fTitleEditComplete';
 		form.submit();
+		//元の文↓
+		//form.act.value = 'tradeEditComplete';
+		//form.submit();
 	}
 }
 

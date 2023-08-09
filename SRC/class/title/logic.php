@@ -11,7 +11,7 @@ function subFTitle()
         $param["sDel"] = 1;
     }
 
-    if (! $param["orderBy"]) {
+    if (!$param["orderBy"]) {
         $param["orderBy"] = 'CLASSNO,SEQNO';
         $param["orderTo"] = 'asc';
     }
@@ -31,7 +31,7 @@ function subFTitleItem()
         $param["sDel"] = 1;
     }
 
-    if (! $param["orderBy"]) {
+    if (!$param["orderBy"]) {
         $param["orderBy"] = 'CLASSNO,SEQNO';
         $param["orderTo"] = 'asc';
     }
@@ -87,14 +87,17 @@ function subFTitleEditComplete()
     $param["classNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['classNo']);
     $param["seqNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['seqNo']);
     $param["name"] = mysqli_real_escape_string($param["conn"], $_REQUEST['name']);
-    $param["sClassNo"] = mysqli_real_escape_string($conn, $_REQUEST['sClassNo']);
+
+    //元の文   $param["sClassNo"] = mysqli_real_escape_string($conn, $_REQUEST['sClassNo']);
+
+    $param["sClassNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['sClassNo']);
 
     $ErrClassNo = subFTitleRepetition($param["classNo"], $param["DocNo"]);
 
     if ($param["DocNo"]) {
         if ($param["seqNo"] == 0) {
             // タイトルの更新処理
-            if (! $ErrClassNo) {
+            if (!$ErrClassNo) {
                 // 更新前の情報を取得
                 $sql = fnSqlFTitleEdit($param["DocNo"]);
                 $res = mysqli_query($param["conn"], $sql);
@@ -133,9 +136,9 @@ function subFTitleEditComplete()
         }
     } else {
         $param["DocNo"] = fnNextNo('DOC');
-        if (! $param["seqNo"]) {
+        if (!$param["seqNo"]) {
 
-            if (! $ErrClassNo) {
+            if (!$ErrClassNo) {
                 $param["seqNo"] = 0;
                 $sql = fnSqlFTitleInsert($param);
                 $res = mysqli_query($param["conn"], $sql);
@@ -184,7 +187,9 @@ function subFTitleDelete()
         $res = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_array($res)) {
             $sql = fnSqlFTitleDelete($row['DOCNO']);
-            $result = mysqil_query($conn, $sql);
+
+            //元の文   $result = mysqil_query($conn, $sql);
+            $result = mysqli_query($conn, $sql);
         }
     } else {
         $sql = fnSqlFTitleDelete($DocNo);

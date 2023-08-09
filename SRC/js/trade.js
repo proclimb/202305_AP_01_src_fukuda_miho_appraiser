@@ -74,7 +74,11 @@ function fnTradeEditCheck() {
 	}
 
 	if (confirm('この内容で登録します。よろしいですか？')) {
-		form.act.value = 'fTitleEditComplete';
+
+		//確認はでるけどタイトルに飛ぶform.act.value = 'fTitleEditComplete';
+		//元の文と同じだけど何故かうまく確認も出て業者一覧に遷移
+		form.act.value = 'tradeEditComplete';
+
 		form.submit();
 		//元の文↓
 		//form.act.value = 'tradeEditComplete';

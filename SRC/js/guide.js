@@ -4,21 +4,22 @@
 function fnGuideEditCheck() {
 
 	var cnt = document.form.cnt.value;
-	for (i = 1; i < cnt; i++) {
+	for (i = 0; i < cnt; i++) {
 
 		var msg = "";
 		if (cnt > 1) { msg = (i + 1) + "件目の"; }
-		tmp = getEditObject(i, "guideStart");
+		//コメントアウトby wiki   tmp = getEditObject(i, "guideStart");
+		tmp = getEditObject(i, "guideStartDT");
 		if (tmp.value == '') { alert(msg + "案内日(開始日付)を入力してください"); return; }
 		if (!fnYMDCheck(msg + "開始日付には正しい日付", tmp)) { return; }
-		if (!fnYMDCheck(msg + "開始日付には正しい日付", getEditObject(i, "guideStartDT"))) { return; }
+		//wikiに沿ってコメントアウト　if (!fnYMDCheck(msg + "開始日付には正しい日付", getEditObject(i, "guideStartDT"))) { return; }
 		if (!fnYMDCheck(msg + "終了日付には正しい日付", getEditObject(i, "guideEndDT"))) { return; }
 		if (isLength(100, msg + "担当", getEditObject(i, "charge"))) { return; }
-		if (isLength(100, msg + "営業店", getEditObject(i, "name"))) { return; }
-		if (isLength(100, msg + "業者名", getEditObject(i, "branch"))) { return; }
+		if (isLength(100, msg + "業者名", getEditObject(i, "name"))) { return; }
+		if (isLength(100, msg + "営業店", getEditObject(i, "branch"))) { return; }
 		if (isLength(100, msg + "TEL", getEditObject(i, "tel"))) { return; }
 		if (isLength(100, msg + "FAX", getEditObject(i, "fax"))) { return; }
-		if (isLength(10, msg + "結果", getEditObject(i, "result"))) { return; }
+		if (isLength(1000, msg + "結果", getEditObject(i, "result"))) { return; }
 		if (!fnYMDCheck(msg + "受付日には正しい日付", getEditObject(i, "acceptDT"))) { return; }
 		if (isLength(100, msg + "受付", getEditObject(i, "accept"))) { return; }
 	}
@@ -64,9 +65,12 @@ function fnGuideMove(muki, articleNo) {
 		var obj = $("#s" + articleNo);
 
 		// 名称の取得
-		var articleName = $(obj.children()[0]).text();
-		var articleRoom = $(obj.children()[1]).text();
-		var articleKey = $(obj.children()[2]).text();
+		//ByWiki   var articleName = $(obj.children()[0]).text();
+		//ByWiki   var articleRoom = $(obj.children()[1]).text();
+		var articleName = $(obj.children()[0]).html();
+		var articleRoom = $(obj.children()[1]).html();
+		//コメントアウトByWiki var articleKey = $(obj.children()[2]).text();
+		var articleKey = $(obj.children()[2]).html();
 
 		// 登録リストに保存(右側に移動)
 		tags = "<tr id=\"r" + articleNo + "\">";
@@ -86,7 +90,8 @@ function fnGuideMove(muki, articleNo) {
 		tags += "<td>" + articleRoom + "</td>";
 
 		// 鍵情報の作成
-		tags += "<td>" + articleKey;
+		// OutByWiki  tags += "<td>" + articleKey;
+		tags += "<td>" + articleKey + "</td>";
 		tags += "</tr>";
 
 		// 登録側に追加
@@ -102,17 +107,19 @@ function fnGuideMove(muki, articleNo) {
 		tags = "<tr id=\"s" + articleNo + "\">";
 
 		// 物件名の作成
-		tags += "<th>" + $(obj.children()[1]).text() + "</th>";
+		//OutByWiki  tags += "<th>" + $(obj.children()[1]).text() + "</th>";
+		tags += "<td>" + $(obj.children()[1]).html() + "</td>";
 
 		// 部屋番号の作成
-		tags += "<td>" + $(obj.children()[2]).text() + "</td>";
+		//OutByWiki  tags += "<td>" + $(obj.children()[2]).text() + "</td>";
 		tags += "<td>" + $(obj.children()[2]).html() + "</td>";
 
 		// 鍵情報の作成
 		tags += "<td>" + $(obj.children()[3]).html() + "</td>";
 
 		// 登録ボタンの作成
-		tags += "<td><input type=\"button\" value=\"&gt;\" /></td>";
+		//ByWiki   tags += "<td><input type=\"button\" value=\"&gt;\" /></td>";
+		tags += "<td><input type=\"button\" value=\"&gt;\" onClick=\"fnGuideMove( 'toRight', '" + articleNo + "' );\" /></td>";
 		tags += "</tr>";
 
 		// 検索側に追加
@@ -123,10 +130,13 @@ function fnGuideMove(muki, articleNo) {
 	}
 
 	// 色の再設定
-	$("#search tr").filter(":odd").find("td").attr("class", "list_td1");
+	//ByWiki   $("#search tr").filter(":odd").find("td").attr("class", "list_td1");
+	$("#search tr").filter(":odd").find("td").attr("class", "list_td0");
 	$("#search tr").filter(":even").find("td").attr("class", "list_td1");
-	$("#regist tr").filter("odd").find(".td").attr("class", "list_td0");
-	$("#regist tr").filter("even").find(".td").attr("class", "list_td1");
+	//ByWiki   $("#regist tr").filter("odd").find(".td").attr("class", "list_td0");
+	//ByWiki   $("#regist tr").filter("even").find(".td").attr("class", "list_td1");
+	$("#regist tr").filter(":odd").find("td").attr("class", "list_td0");
+	$("#regist tr").filter(":even").find("td").attr("class", "list_td1");
 }
 
 

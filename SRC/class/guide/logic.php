@@ -116,7 +116,9 @@ function subGuideEdit()
     $param = getGuideParam();
 
     $param["guideNo"] = $_REQUEST['guideNo']; // 案内管理一覧画面から(編集モード)
+    var_dump($param);
     $param["articleNo"] = $_REQUEST['articleNo']; // 物件検索画面から(新規作成)
+    var_dump($param);
 
     if ($param["guideNo"]) {
         // 編集モード
@@ -136,6 +138,7 @@ function subGuideEdit()
         $param["exam"] = htmlspecialchars($row["EXAM"]);
         $param["purchase"] = htmlspecialchars($row["PURCHASE"]);
         $param["name"] = htmlspecialchars($row["NAME"]);
+        var_dump($param);
         $param["branch"] = htmlspecialchars($row["BRANCH"]);
         $param["tel"] = htmlspecialchars($row["TEL"]);
         $param["fax"] = htmlspecialchars($row["FAX"]);
@@ -156,6 +159,7 @@ function subGuideEdit()
         $param["articleList"] = array();
         foreach ($_REQUEST["articleList"] as $row) {
             $param["articleList"][] = $row["articleNo"];
+            var_dump($param);
         }
 
         $param["purpose"] = '登録';
@@ -173,6 +177,7 @@ function subGuideEdit()
         $article["room"] = htmlspecialchars($row["ROOM"]);
 
         $param["articleList"][] = $article;
+        var_dump($param);
     }
 
     subMenu();
@@ -194,6 +199,7 @@ function subGuideEditComplete()
         $param["guideStartDT"] = mysqli_real_escape_string($conn, $row['guideStartDT']);
         $param["guideEndDT"] = mysqli_real_escape_string($conn, $row['guideEndDT']);
         $param["name"] = mysqli_real_escape_string($conn, $row['name']);
+        var_dump($param);
         $param["branch"] = mysqli_real_escape_string($conn, $row['branch']);
         $param["tel"] = mysqli_real_escape_string($conn, $row['tel']);
         $param["fax"] = mysqli_real_escape_string($conn, $row['fax']);
@@ -214,10 +220,12 @@ function subGuideEditComplete()
         if ($param["guideNo"]) {
             $sql = fnSqlGuideUpdate($param);
             $res = mysqli_query($conn, $sql);
+            var_dump($param);
         } else {
             $param["guideNo"] = fnNextNo('GUIDE');
             $sql = fnSqlGuideInsert($param);
             $res = mysqli_query($conn, $sql);
+            var_dump($param);
         }
     }
 
@@ -257,6 +265,7 @@ function getGuideParam()
     $param["sArticle"] = htmlspecialchars($_REQUEST['sArticle']);
     $param["sRoom"] = htmlspecialchars($_REQUEST['sRoom']);
     $param["sName"] = htmlspecialchars($_REQUEST['sName']);
+    var_dump($param);
     $param["sBranch"] = htmlspecialchars($_REQUEST['sBranch']);
     $param["sSellCharge"] = htmlspecialchars($_REQUEST['sSellCharge']);
     $param["sTel"] = htmlspecialchars($_REQUEST['sTel']);
@@ -278,4 +287,5 @@ function getGuideParam()
     $param["articleList"] = $_REQUEST['articleList'];
 
     return $param;
+    var_dump($param);
 }

@@ -15,6 +15,7 @@ function subArticle()
 	$sDrawing     = htmlspecialchars($_REQUEST['sDrawing']);
 	$sSellCharge  = htmlspecialchars($_REQUEST['sSellCharge']);
 
+
 	$orderBy = $_REQUEST['orderBy'];
 	$orderTo = $_REQUEST['orderTo'];
 	$sPage   = $_REQUEST['sPage'];

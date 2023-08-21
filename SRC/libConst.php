@@ -457,7 +457,7 @@ function subConstEdit()
 			</tr>
 		</table>
 
-		<a href="javascript:fnConstEditCheck();"><img src="./images/btn_load.png" /></a>　
+		<a href="javascript:fnConstEditCheck();"><img src="./images/btn_load.png" /></a>
 		<a href="javascript:form.act.value='constSearch';form.submit();"><img src="./images/btn_return.png" /></a><br />
 	</form>
 <?php

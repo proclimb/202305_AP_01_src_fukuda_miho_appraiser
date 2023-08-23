@@ -88,9 +88,12 @@ function subFTitleEditComplete()
     $param["seqNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['seqNo']);
     $param["name"] = mysqli_real_escape_string($param["conn"], $_REQUEST['name']);
 
+
     //元の文   $param["sClassNo"] = mysqli_real_escape_string($conn, $_REQUEST['sClassNo']);
 
     $param["sClassNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['sClassNo']);
+
+
 
     $ErrClassNo = subFTitleRepetition($param["classNo"], $param["DocNo"]);
 

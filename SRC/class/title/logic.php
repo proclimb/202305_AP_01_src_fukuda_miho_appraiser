@@ -179,6 +179,30 @@ function subTitlePage1()
 //
 // タイトル管理削除処理
 //
+// function subFTitleDelete()
+// {
+//     $conn = fnDbConnect();
+
+//     $DocNo = $_REQUEST['DocNo'];
+
+//     if ($_REQUEST['seqNo'] == 0) {
+//         $sql = fnSqlFTitleRepetition($_REQUEST['classNo']);
+//         $res = mysqli_query($conn, $sql);
+//         while ($row = mysqli_fetch_array($res)) {
+//             $sql = fnSqlFTitleDelete($row['DOCNO']);
+
+//             //元の文   $result = mysqil_query($conn, $sql);
+//             $result = mysqli_query($conn, $sql);
+//         }
+//     } else {
+//         $sql = fnSqlFTitleDelete($DocNo);
+//         $res = mysqli_query($conn, $sql);
+//     }
+
+//     $_REQUEST['act'] = 'fTitleSearch';
+//     subFTitle();
+// }
+
 function subFTitleDelete()
 {
     $conn = fnDbConnect();
@@ -190,17 +214,16 @@ function subFTitleDelete()
         $res = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_array($res)) {
             $sql = fnSqlFTitleDelete($row['DOCNO']);
-
-            //元の文   $result = mysqil_query($conn, $sql);
             $result = mysqli_query($conn, $sql);
         }
+        $_REQUEST['act'] = 'fTitleSearch'; // ← 追加
+        subFTitle(); // ← 追加
     } else {
         $sql = fnSqlFTitleDelete($DocNo);
         $res = mysqli_query($conn, $sql);
+        subTitlePage1(); // ← 追加
     }
-
-    $_REQUEST['act'] = 'fTitleSearch';
-    subFTitle();
+    // ここにあった２行は削除
 }
 
 //

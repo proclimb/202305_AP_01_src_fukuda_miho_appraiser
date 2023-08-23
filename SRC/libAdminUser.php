@@ -42,8 +42,13 @@ function subAdminUser()
 						<td class="list_td<?php print $i; ?>"><?php print $id; ?></td>
 						<td class="list_td<?php print $i; ?>"><?php print $password; ?></td>
 						<td class="list_td<?php print $i; ?>"><?php print fnAuthorityName($authority); ?></td>
-						<td class="list_td<?php print $i; ?>">
+						<!-- <td class="list_td<?php print $i; ?>">
 							<a href="javascript:fnAdminUserDeleteCheck(<?php print $userNo; ?>,'<?php print $name; ?>');">削除</a>
+						</td> -->
+						<td class="list_td<?php print $i; ?>">
+							<?php if ($userNo > 1) { ?>
+								<a href="javascript:fnAdminUserDeleteCheck(<?php print $userNo; ?>,'<?php print $name; ?>');">削除</a>
+							<?php } ?>
 						</td>
 					</tr>
 				<?php
@@ -101,11 +106,11 @@ function subAdminUserEdit()
 				<td><input type="text" name="name" value="<?php print $name; ?>" /></td>
 			</tr>
 			<tr>
-				<th>ID</th>
+				<th>ID<span class="red">（必須）</span></th>
 				<td><input type="text" name="id" value="<?php print $id; ?>" /></td>
 			</tr>
 			<tr>
-				<th>PASS</th>
+				<th>PASS<span class="red">（必須）</span></th>
 				<td><input type="text" name="password" value="<?php print $password; ?>" /></td>
 			</tr>
 			<tr>

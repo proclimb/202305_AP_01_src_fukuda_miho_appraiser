@@ -75,10 +75,8 @@ function fnTradeEditCheck() {
 
 	if (confirm('この内容で登録します。よろしいですか？')) {
 
-		//確認はでるけどタイトルに飛ぶform.act.value = 'fTitleEditComplete';
-		//元の文と同じだけど何故かうまく確認も出て業者一覧に遷移
-		form.act.value = 'tradeEditComplete';
 
+		form.act.value = 'tradeEditComplete';
 		form.submit();
 		//元の文↓
 		//form.act.value = 'tradeEditComplete';
@@ -88,9 +86,17 @@ function fnTradeEditCheck() {
 
 
 
+// function fnTradeDeleteCheck(no) {
+// 	if (confirm('削除します。よろしいですか？')) {
+// 		form.tradeNo.value = no;
+// 		form.submit();
+// 	}
+// }
+
 function fnTradeDeleteCheck(no) {
 	if (confirm('削除します。よろしいですか？')) {
 		form.tradeNo.value = no;
+		form.act.value = 'tradeDelete';
 		form.submit();
 	}
 }

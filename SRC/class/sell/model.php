@@ -15,6 +15,8 @@ function fnSqlSellList($flg, $param)
             $select = "SELECT SELLNO,IF(SEARCHDT > '0000-00-00',DATE_FORMAT(SEARCHDT,'%Y/%m/%d'),''),ARTICLE,"
                 . "ADDRESS,STATION,IF(FOOT > 0,FOOT,''),IF(YEARS > 0,YEARS,''),IF(FLOOR > 0,FLOOR,''),"
                 . "IF(AREA > 0,AREA,''),SELLER,IF(PRICE > 0,PRICE,''),NOTE";
+
+
             // 並び替えとデータ抽出数
             if ($param["orderBy"]) {
                 $order = " ORDER BY " . $param["orderBy"] . " " . $param["orderTo"];
@@ -84,8 +86,17 @@ function fnSqlSellList($flg, $param)
 //
 function fnSqlSellEdit($sellNo)
 {
-    $select  = "SELECT SEARCHDT,ARTICLE,ADDRESS,STATION,IF(FOOT > 0,FOOT,''),";
+    //$select  = "SELECT SEARCHDT,ARTICLE,ADDRESS,STATION,IF(FOOT > 0,FOOT,''),";
+    $select = "SELECT IF(SEARCHDT > '0000-00-00',DATE_FORMAT(SEARCHDT,'%Y/%m/%d'),''),ARTICLE,ADDRESS,STATION,IF(FOOT > 0,FOOT,''),";
     $select .= "IF(YEARS > 0,YEARS,''),IF(FLOOR > 0,FLOOR,''),IF(AREA > 0,AREA,''),SELLER,IF(PRICE > 0,PRICE,''),NOTE";
+
+    // IF(FOOT > 0,FOOT,'') //シンタックスエラーになるので中止
+    // IF(YEARS > 0,YEARS,'')
+    // IF(FLOOR > 0,FLOOR,'')
+    // IF(AREA > 0,AREA,'')
+    // IF(PRICE > 0,PRICE,'')
+
+
     $from = " FROM TBLSELL";
     $where = " WHERE DEL = 1";
     $where .= " AND SELLNO = $sellNo";
@@ -111,6 +122,8 @@ function fnSqlSellUpdate($param)
     $sql .= ",PRICE = '" . $param["price"] . "'";
     $sql .= ",NOTE = '" . $param["note"] . "'";
     $sql .= ",UPDT = CURRENT_TIMESTAMP";
+    //追加
+    $sql .= " WHERE SELLNO = " . $param["sellNo"];
 
     return $sql;
 }
@@ -150,7 +163,8 @@ function fnSqlSellInsert($param)
 function fnSqlSellDelete($sellNo)
 {
     $sql = "UPDATE TBLSELL";
-    $sql .= " SET DEL = 1";
+    //  $sql .= " SET DEL = 1";
+    $sql .= " SET DEL = -1"; // ← -1 に修正
     $sql .= ",UPDT = CURRENT_TIMESTAMP";
     $sql .= " WHERE SELLNO = '$sellNo'";
 

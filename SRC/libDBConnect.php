@@ -57,13 +57,26 @@ function fnSqlAdminUserUpdate($userNo, $name, $id, $password, $authority)
 //
 // ユーザー情報登録
 //
+// function fnSqlAdminUserInsert($userNo, $name, $id, $password, $authority)
+// {
+//     $pass = addslashes(hash('adler32', $password));
+//     $sql = "INSERT INTO TBLUSER(";
+//     $sql .= "USERNO,NAME,ID,PASSWORD,AUTHORITY,INSDT,UPDT,DEL";
+//     $sql .= ")VALUES(";
+//     $sql .= "'$userNo','$name','$id','$pass','$authority',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
+
+//     return ($sql);
+// }
+
+//
+// ユーザー情報登録
+//
 function fnSqlAdminUserInsert($userNo, $name, $id, $password, $authority)
 {
-    $pass = addslashes(hash('adler32', $password));
     $sql = "INSERT INTO TBLUSER(";
     $sql .= "USERNO,NAME,ID,PASSWORD,AUTHORITY,INSDT,UPDT,DEL";
     $sql .= ")VALUES(";
-    $sql .= "'$userNo','$name','$id','$pass','$authority',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
+    $sql .= "'$userNo','$name','$id','$password','$authority',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
 
     return ($sql);
 }

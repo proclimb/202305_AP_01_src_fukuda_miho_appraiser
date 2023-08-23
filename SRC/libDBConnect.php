@@ -40,13 +40,28 @@ function fnSqlAdminUserEdit($userNo)
 //
 // ユーザー情報更新
 //
+// function fnSqlAdminUserUpdate($userNo, $name, $id, $password, $authority)
+// {
+//     $pass = addslashes(hash('adler32', $password));
+//     $sql = "UPDATE TBLUSER";
+//     $sql .= " SET NAME = '$name'";
+//     $sql .= ",ID = '$id'";
+//     $sql .= ",PASSWORD = '$pass'";
+//     $sql .= ",AUTHORITY = '$authority'";
+//     $sql .= ",UPDT = CURRENT_TIMESTAMP";
+//     $sql .= " WHERE USERNO = '$userNo'";
+
+//     return ($sql);
+// }
+//
+// ユーザー情報更新
+//
 function fnSqlAdminUserUpdate($userNo, $name, $id, $password, $authority)
 {
-    $pass = addslashes(hash('adler32', $password));
     $sql = "UPDATE TBLUSER";
     $sql .= " SET NAME = '$name'";
     $sql .= ",ID = '$id'";
-    $sql .= ",PASSWORD = '$pass'";
+    $sql .= ",PASSWORD = '$password'";
     $sql .= ",AUTHORITY = '$authority'";
     $sql .= ",UPDT = CURRENT_TIMESTAMP";
     $sql .= " WHERE USERNO = '$userNo'";
